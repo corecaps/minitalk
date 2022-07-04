@@ -15,16 +15,16 @@ NAME_CLIENT = client
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 DEBUG_FLAG = -g
-LIB =
+LIB = -Lft_printf -lftprintf
 INC = 
 
-SOURCES_SRV = 
+SOURCES_SRV = server.c
 
-SOURCES_CLIENT = 
+SOURCES_CLIENT = client.c
 
-OBJ_SRV =
+OBJ_SRV = $(SOURCES_SRV:.c=.o)
 
-OBJ_CLIENT = 
+OBJ_CLIENT = $(SOURCES_CLIENT:.c=.o)
 
 all: $(NAME_SRV) $(NAME_CLIENT)
 

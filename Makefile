@@ -17,35 +17,31 @@ CFLAGS = -Wall -Wextra -Werror
 DEBUG_FLAG = -g
 LIB = -Lft_printf -lftprintf
 INC = 
-
 SOURCES_SRV = server.c
-
 SOURCES_CLIENT = client.c
-
 OBJ_SRV = $(SOURCES_SRV:.c=.o)
-
 OBJ_CLIENT = $(SOURCES_CLIENT:.c=.o)
 
-all: $(NAME_SRV) $(NAME_CLIENT)
+all: 			$(NAME_SRV) $(NAME_CLIENT)
 
-$(NAME_SRV): $(OBJ_SRV)
+$(NAME_SRV): 	$(OBJ_SRV)
 	$(CC) $(OBJ_SRV) $(LIB) $(CFLAGS) -o $(NAME_SRV)
 
 $(NAME_CLIENT): $(OBJ_CLIENT)
 	$(CC) $(OBJ_CLIENT) $(LIB) $(CFLAGS) -o $(NAME_CLIENT)
 
-%.o : %.c
-	$(CC) $(CFLAGS) $(INC) -c -o $@ @<
+%.o: 			%.c
+	$(CC) $(CFLAGS) $(INC) -c -o $@ $<
 
 clean:
 	rm -f $(OBJ_CLIENT)
 	rm -f $(OBJ_SRV)
 
-fclean:
+fclean: 		clean
 	rm -f $(NAME_SRV)
 	rm -f $(NAME_CLIENT)
 
-re: fclean all
+re: 			fclean all
 
 norme:
 	norminette $(SOURCES_CLIENT)

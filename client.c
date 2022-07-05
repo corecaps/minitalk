@@ -11,16 +11,18 @@
 /* ************************************************************************** */
 #include "ft_printf/ft_printf.h"
 #include "client.h"
+#include <signal.h>
 
 int	main(int argc, char **argv)
 {
-	int pid;
+	pid_t pid;
 
 	if (argc != 3)
 	{
 		ft_printf("Usage : %s PID string_to_send\n", argv[0]);
 		return (-1);
 	}
-	pid = ft_atoi(argv[1]);
-	(void) pid;
+	pid = (pid_t) ft_atoi(argv[1]);
+	talk(pid, argv[2]);
+	return (0);
 }

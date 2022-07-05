@@ -30,16 +30,6 @@ int     ft_isdigit(int c)
 	return (0);
 }
 
-size_t  ft_strlen(const char *s)
-{
-	unsigned int    res;
-
-	res = 0;
-	while (s[res] != 0)
-		res ++;
-	return (res);
-}
-
 int     ft_atoi(const char *nptr)
 {
         int                     signe;

@@ -25,15 +25,15 @@ void listen(int signum)
 		data |= 1;
 		data <<= 1;
 		count ++;
-		write(1,"1\n",2);
-		ft_printf("{%d}",data);
+		write(1,"1",1);
+		ft_printf("{%d}\n",data);
 	}
 	else if (signum == SIGUSR2)
 	{
 		data <<= 1;
 		count ++;
-		write(1,"0\n",2);
-		ft_printf("{%d}",data);
+		write(1,"0",2);
+		ft_printf("{%d}\n",data);
 	}
 	if (count == 8)
 	{

@@ -23,8 +23,10 @@ void talk(pid_t pid,char *str)
 	{
 		c = *str;
 		i = 0;
+		ft_printf("[%d]\n",c);
 		while (i < 8)
 		{
+		// binary is transmitted backward !!!!
 			if (c & 1)
 			{
 				kill(pid, SIGUSR1);

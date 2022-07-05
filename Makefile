@@ -18,7 +18,7 @@ DEBUG_FLAG = -g
 LIB = -Lft_printf -lftprintf
 INC = 
 SOURCES_SRV = server.c
-SOURCES_CLIENT = client.c
+SOURCES_CLIENT = client.c client_utils.c
 OBJ_SRV = $(SOURCES_SRV:.c=.o)
 OBJ_CLIENT = $(SOURCES_CLIENT:.c=.o)
 

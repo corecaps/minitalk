@@ -10,13 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf/ft_printf.h"
-#include <unistd.h>
-#include <sys/types.h>
-#include <signal.h>
+#include "server.h"
 
-void listen(int signum)
+void listen(int signum,siginfo_t *client_info,void *context)
 {
+	pid_t 	client_pid;
+
+	client_pid = client_info->si_pid;
+	(void      )client_pid;
+	(void)context      ;
 	static char data = 0;
 	static int 	count = 0;
 
@@ -50,9 +52,9 @@ int main(void)
 	pid_t server_pid;
 	struct sigaction message_handler;
 
-	message_handler.sa_handler = listen;
+	message_handler.sa_sigaction = listen;
 	sigemptyset(&message_handler.sa_mask);
-	message_handler.sa_flags = 0;
+	message_handler.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &message_handler, NULL);
 	sigaction(SIGUSR2, &message_handler,NULL);
 	server_pid = getpid();

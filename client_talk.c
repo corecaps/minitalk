@@ -22,25 +22,29 @@ void talk(pid_t pid,char *str)
 	while (str && *str != '\0')
 	{
 		c = *str;
-		i = 0;
-		ft_printf("[%d]\n",c);
-		while (i < 8)
+		i = 1;
+//		ft_printf("\n[%d]\n",c);
+
+		while (i < 9)
 		{
-		// binary is transmitted backward !!!!
-			if (c & 1)
+			// binary is transmitted backward !!!!
+			if (c & (1 << (8 - i)))
 			{
+
 				kill(pid, SIGUSR1);
-				write(1, "1\n", 2);
+//				write(1, "\t1", 2);
+
 			}
 			else
 			{
 				kill(pid, SIGUSR2);
-				write(1, "0\n", 2);
+//				write(1, "\t0", 2);
 			}
-			c = c >> 1;
+			//c = c >> 1;
 			i ++;
-			usleep(200);
+			usleep(500);
 		}
+//		write(1,"\n",1);
 		str ++;
 	}
 }

@@ -16,6 +16,6 @@
 int     ft_atoi(const char *nptr);
 int     ft_isdigit(int c);
 size_t  ft_strlen(const char *s);
-void	talk(int pid,char *str);
+void	talk(int pid);
 
 #endif //MINITALK_CLIENT_H

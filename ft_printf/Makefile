@@ -6,7 +6,7 @@
 #    By: jgarcia <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/26 13:04:29 by jgarcia           #+#    #+#              #
-#    Updated: 2022/06/02 02:49:46 by jgarcia          ###   ########.fr        #
+#    Updated: 2022/08/16 13:27:04 by jgarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME				= libftprintf.a
@@ -19,7 +19,7 @@ OBJ					:= $(SOURCES:.c=.o)
 
 CC					= gcc
 RM					= rm -rf
-CFLAGS				= -Wall -Wextra -c -g
+CFLAGS				= -Wall -Wextra -Werror -c -g
 
 all:				$(NAME)
 

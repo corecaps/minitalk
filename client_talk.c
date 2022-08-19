@@ -21,7 +21,6 @@
 void talk(pid_t pid)
 {
 	kill(pid,SIGUSR1);
-	ft_printf("handshake send");
 	/*	while (str && *str != '\0')
 	{
 		c = *str;
@@ -36,7 +35,7 @@ void talk(pid_t pid)
 			else
 				kill(pid, SIGUSR2);
 			i ++;
-			usleep(500);
+			usleep(100);
 		}
 		str ++;
 	}

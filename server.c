@@ -17,28 +17,45 @@ void listen(int signum,siginfo_t *client_info,void *context)
 	static pid_t 	client_pid = 0;
 	static char data = 0;
 	static int 	count = 1;
+	static  int handshake = 0;
 
 	(void)context      ;
 	if (client_pid == 0)
 		client_pid = client_info->si_pid;
-	if (signum == SIGUSR1)
+	if (handshake == 1)
 	{
-		data =  data << 1;
-		data |= 1;
-		count ++;
+		if (signum == SIGUSR1)
+		{
+			data =  data << 1;
+			data |= 1;
+			count ++;
+		}
+		else if (signum == SIGUSR2)
+		{
+			data = data << 1;
+			count ++;
+		}
+		if (count == 9)
+		{
+			if (data == 0)
+			{
+				handshake = 0;
+				client_pid = 0;
+				data = 0;
+				count = 1;
+				return ;
+			}
+			write (1, &data, 1);
+			data = 0;
+			count = 1;
+		}
 	}
-	else if (signum == SIGUSR2)
+	else if (signum == SIGUSR1)
 	{
-		data = data << 1;
-		count ++;
-	}
-	if (count == 9)
-	{
-		write (1, &data, 1);
-		data = 0;
+		handshake = 1;
 		count = 1;
 	}
-	ft_printf("RCV");
+	usleep(10);
 	kill(client_pid, SIGUSR1);
 }
 int main(void)
@@ -56,7 +73,7 @@ int main(void)
 
 	while (1)
 	{
-		usleep(5);
+		usleep(500);
 	}
 	return (0);
 }

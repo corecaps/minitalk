@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINITALK_CLIENT_H
-# define MINITALK_CLIENT_H
+#ifndef CLIENT_H
+# define CLIENT_H
+# include <signal.h>
 
-int     ft_atoi(const char *nptr);
-int     ft_isdigit(int c);
-size_t  ft_strlen(const char *s);
-void	talk(int pid);
-
-#endif //MINITALK_CLIENT_H
+void	handshake_retry(const siginfo_t *server_info);
+int		send_null(const siginfo_t *server_info, int count);
+int		ft_atoi(const char *nptr);
+int		ft_isdigit(int c);
+#endif

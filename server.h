@@ -1,16 +1,25 @@
-//
-// Created by corecaps on 20/07/22.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/29 23:10:23 by jgarcia           #+#    #+#             */
+/*   Updated: 2022/08/30 00:24:00 by jgarcia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#ifndef MINITALK_SERVER_H
-#define MINITALK_SERVER_H
-#include "ft_printf/ft_printf.h"
-#include <unistd.h>
-#include <signal.h>
-typedef struct s_message
-{
-	pid_t				pid;
-	int 				bit;
-	struct s_message	*next;
-} t_message;
-#endif //MINITALK_SERVER_H
+#ifndef SERVER_H
+# define SERVER_H
+# include "ft_printf/ft_printf.h"
+# include <unistd.h>
+# include <signal.h>
+# define BUFFER_SIZE 1024
+
+pid_t	next_byte(pid_t *client_pid, int *count, int *handshake,
+			int *buffer_index);
+int		get_data(int signum, int count, int buffer_index);
+void	write_buffer(int *buffer_index, int *handshake,
+			int *count, pid_t *client_pid);
+#endif

@@ -6,65 +6,66 @@
 /*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 00:56:44 by jgarcia           #+#    #+#             */
-/*   Updated: 2022/07/06 00:56:45 by jgarcia          ###   ########.fr       */
+/*   Updated: 2022/08/30 00:24:19 by jgarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
 #include <string.h>
 
-static char     *ft_remove_space(const char *str)
+static char	*ft_remove_space(const char *str)
 {
-        size_t  pos;
+	size_t	pos;
 
-        pos = 0;
-        while ((str[pos] != '\0') && ((str[pos] == ' ')
-                        || ((str[pos] >= 9) && (str[pos] <= 13))))
-                pos ++;
-        return ((char *)str + pos);
+	pos = 0;
+	while ((str[pos] != '\0') && ((str[pos] == ' ')
+			|| ((str[pos] >= 9) && (str[pos] <= 13))))
+			pos ++;
+	return ((char *)str + pos);
 }
 
-static long int check_result(long int result, int signe)
+static long int	check_result(long int result, int signe)
 {
-        if (result > INT_MAX || result < INT_MIN)
-        {
-                if (signe < 1)
-                        return (0);
-                else
-                        return (-1);
-        }
-        return (result);
+	if (result > INT_MAX || result < INT_MIN)
+	{
+		if (signe < 1)
+			return (0);
+		else
+			return (-1);
+	}
+	return (result);
 }
-int     ft_isdigit(int c)
+
+int	ft_isdigit(int c)
 {
 	if ((c >= '0') && (c <= '9'))
 		return (2048);
 	return (0);
 }
 
-int     ft_atoi(const char *nptr)
+int	ft_atoi(const char *nptr)
 {
-        int                     signe;
-        size_t          pos;
-        long int        result;
+	int			signe;
+	size_t		pos;
+	long int	result;
 
-        signe = 1;
-        result = 0;
-        nptr = ft_remove_space(nptr);
-        if (nptr[0] == '-')
-        {
-                signe *= -1;
-                nptr ++;
-        }
-        else if (nptr[0] == '+')
-                nptr ++;
-        pos = 0;
-        while ((nptr[pos] != '\0') && (ft_isdigit(nptr[pos])))
-        {
-                result = result * 10 + nptr[pos] - '0';
-                pos ++;
-        }
-        result *= signe;
-        result = check_result(result, signe);
-        return (result);
+	signe = 1;
+	result = 0;
+	nptr = ft_remove_space(nptr);
+	if (nptr[0] == '-')
+	{
+			signe *= -1;
+			nptr ++;
+	}
+	else if (nptr[0] == '+')
+			nptr ++;
+	pos = 0;
+	while ((nptr[pos] != '\0') && (ft_isdigit(nptr[pos])))
+	{
+			result = result * 10 + nptr[pos] - '0';
+			pos ++;
+	}
+	result *= signe;
+	result = check_result(result, signe);
+	return (result);
 }

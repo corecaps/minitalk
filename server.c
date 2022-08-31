@@ -61,7 +61,7 @@ int	get_data(int signum, int count, int buffer_index)
 {
 	if (signum == SIGUSR1)
 	{
-		g_buffer[buffer_index] = g_buffer[buffer_index] << 1;
+		g_buffer[buffer_index] = (char)(g_buffer[buffer_index] << 1);
 		g_buffer[buffer_index] |= 1;
 		count ++;
 	}

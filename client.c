@@ -81,6 +81,6 @@ int	main(int argc, char **argv)
 	pid = (pid_t) ft_atoi(argv[1]);
 	kill(pid, SIGUSR1);
 	while (g_str != NULL)
-		usleep(100);
+		usleep(300);
 	return (0);
 }

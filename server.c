@@ -6,7 +6,7 @@
 /*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 23:56:09 by jgarcia           #+#    #+#             */
-/*   Updated: 2022/08/30 00:23:50 by jgarcia          ###   ########.fr       */
+/*   Updated: 2022/08/31 11:28:12 by jgarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,23 @@ void	listen(int signum, siginfo_t *client_info, void *context)
 	}
 	else if (signum == SIGUSR1)
 		handshake = 1;
-	kill(client_pid, SIGUSR1);
+	if (client_pid != 0)
+		kill(client_pid, SIGUSR1);
 }
 
 pid_t	next_byte(pid_t *client_pid, int *count,
 			int *handshake, int *buffer_index)
 {
 	if (g_buffer[(*buffer_index)] == 0)
-		write_buffer(buffer_index, handshake, count, client_pid);
+	{
+		write (1, &g_buffer, *buffer_index + 1);
+		g_buffer[0] = 0;
+		(*handshake) = 0;
+		(*buffer_index) = 0;
+		(*count) = 1;
+		(*client_pid) = 0;
+		return (0);
+	}
 	(*buffer_index)++;
 	if ((*buffer_index) == BUFFER_SIZE)
 	{
@@ -67,20 +76,10 @@ int	get_data(int signum, int count, int buffer_index)
 	}
 	else if (signum == SIGUSR2)
 	{
-		g_buffer[buffer_index] = g_buffer[buffer_index] << 1;
+		g_buffer[buffer_index] = (char)(g_buffer[buffer_index] << 1);
 		count ++;
 	}
 	return (count);
-}
-
-void	write_buffer(int *buffer_index, int *handshake,
-					int *count, pid_t *client_pid)
-{
-	write (1, &g_buffer, *buffer_index + 1);
-	*handshake = 0;
-	*client_pid = 0;
-	*buffer_index = 0;
-	*count = 1;
 }
 
 int	main(void)

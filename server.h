@@ -20,6 +20,4 @@
 pid_t	next_byte(pid_t *client_pid, int *count, int *handshake,
 			int *buffer_index);
 int		get_data(int signum, int count, int buffer_index);
-void	write_buffer(int *buffer_index, int *handshake,
-			int *count, pid_t *client_pid);
 #endif
